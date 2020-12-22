@@ -15,13 +15,12 @@ express()
   .use(bodyParser.urlencoded({ extended: true }))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
-  .get("/", (req, res) => res.json({ title: "Welcome to my first post" }))
-  .post("/post", (req, res) => {
-    const { title, body } = req.body;
+  .post("/asset", (req, res) => {
+    const { name, description } = req.body;
 
     db.query(
-      "INSERT INTO blog (title, body) VALUES ($1, $2)",
-      [title, body],
+      "INSERT INTO assets (name, description) VALUES ($1, $2)",
+      [name, description],
       (error, results) => {
         if (error) {
           throw error;
@@ -31,8 +30,8 @@ express()
       }
     );
   })
-  .get("/posts", (req, res) => {
-    db.query("SELECT * FROM blog", (error, results) => {
+  .get("/assets", (req, res) => {
+    db.query("SELECT * FROM assets", (error, results) => {
       if (error) {
         throw error;
       }
