@@ -16,11 +16,31 @@ express()
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
   .post("/asset", (req, res) => {
-    const { name, description } = req.body;
+    const {
+      title,
+      name,
+      house,
+      ownership,
+      city,
+      street,
+      zip_code,
+      price,
+      image_header,
+    } = req.body;
 
     db.query(
-      "INSERT INTO assets (name, description) VALUES ($1, $2)",
-      [name, description],
+      "INSERT INTO assets (title, name, house, ownership, city, street, zip_code, price, image_header) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+      [
+        title,
+        name,
+        house,
+        ownership,
+        city,
+        street,
+        zip_code,
+        price,
+        image_header,
+      ],
       (error, results) => {
         if (error) {
           throw error;
