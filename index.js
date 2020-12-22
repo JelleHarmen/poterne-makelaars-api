@@ -15,13 +15,13 @@ express()
   .use(bodyParser.urlencoded({ extended: true }))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
-  .get("/", (req, res) => res.json({ hello: "world" }))
+  .get("/", (req, res) => res.json({ title: "Welcome to my first post" }))
   .post("/post", (req, res) => {
-    const { name, body } = req.body;
+    const { title, body } = req.body;
 
     db.query(
-      "INSERT INTO blog (name, body) VALUES ($1, $2)",
-      [name, body],
+      "INSERT INTO blog (title, body) VALUES ($1, $2)",
+      [title, body],
       (error, results) => {
         if (error) {
           throw error;
