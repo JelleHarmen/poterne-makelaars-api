@@ -18,7 +18,6 @@ express()
   .post("/asset", (req, res) => {
     const {
       title,
-      name,
       asset_id,
       city,
       street,
@@ -28,8 +27,8 @@ express()
     } = req.body;
 
     db.query(
-      "INSERT INTO assets (title, name, house, ownership, city, street, zip_code, price, image_header) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-      [title, name, asset_id, city, street, zip_code, price, image_header],
+      "INSERT INTO assets (title, asset_id,city,street,zip_code,price,image_header) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+      [title, asset_id, city, street, zip_code, price, image_header],
       (error, results) => {
         if (error) {
           throw error;
